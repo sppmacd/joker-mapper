@@ -30,6 +30,10 @@ public:
     /// \sa Polygon(std::vector<std::vector<double>> const& data)
     explicit Polygon(std::vector<Punkt2> data);
 
+    /// \brief Konstruktor klasy Punkt2 z std::initializer list
+    /// \example Punkt2 p {10, 1};
+    Polygon(std::initializer_list<Punkt2>);
+
     /// \brief Konstruktor kopiujący.
     Polygon(Polygon const&);
 

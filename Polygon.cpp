@@ -35,6 +35,13 @@ Polygon::Polygon(std::vector<Punkt2> data) {
     setVertices(data.data(), data.size());
 }
 
+Polygon::Polygon(std::initializer_list<Punkt2> data) {
+    object_count++;
+    setCount(data.size());
+    for (size_t s = 0; s < data.size(); s++)
+        m_vertices[s] = data.begin()[s];
+}
+
 Polygon::Polygon(Polygon const& other) {
     object_count++;
     setVertices(other.m_vertices, other.m_count);
@@ -133,7 +140,7 @@ std::ostream& operator<<(std::ostream& out, Polygon const& p) {
     out << "Polygon{";
     for (size_t s = 0; s < p.getVertexCount(); s++) {
         out << p.vertices()[s];
-        if(s != p.getVertexCount() - 1)
+        if (s != p.getVertexCount() - 1)
             out << ", ";
     }
     return out << "}";

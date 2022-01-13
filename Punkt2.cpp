@@ -20,11 +20,18 @@ Punkt2::Punkt2(double x_, double y_)
     : x(x_)
     , y(y_) {
     object_count++;
+    std::cout << "Uruchomiono Punkt2(" << x_ << "," << y_ << ")" << std::endl;
+}
+
+Punkt2::Punkt2(std::initializer_list<double> p) {
+    x = *(p.begin());
+    y = *(p.begin() + 1);
+    object_count++;
+    std::cout << "Uruchomienie konstruktora z std::initializer_list dla obiektu: " << *this << std::endl;
 }
 
 Punkt2::~Punkt2() {
     object_count--;
-    std::cout << "~Punkt2()" << std::endl;
 }
 
 // settery
@@ -71,7 +78,6 @@ double operator*(Punkt2 const& _1, Punkt2 const& _2) {
     return _1.getX() * _2.getX() + _1.getY() * _2.getY();
 }
 
-std::ostream& operator<<(std::ostream& out, Punkt2 const& punkt)
-{
+std::ostream& operator<<(std::ostream& out, Punkt2 const& punkt) {
     return out << "[" << punkt.getX() << "," << punkt.getY() << "]";
 }

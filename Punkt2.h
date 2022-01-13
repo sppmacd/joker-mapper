@@ -28,6 +28,10 @@ public:
     /// \param y_
     Punkt2(double x_, double y_);
 
+    /// \brief Konstruktor klasy Punkt2 z std::initializer list
+    /// \example Punkt2 p {10, 1};
+    Punkt2(std::initializer_list<double>);
+
     ~Punkt2();
 
     /// \brief Ustaw współrzędną X punktu
