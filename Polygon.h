@@ -40,6 +40,12 @@ public:
     /// \brief Kopiujący operator przypisania. Wykonuje kopię głęboką.
     Polygon& operator=(Polygon const&);
 
+    /// \brief Konstruktor przenoszący.
+    Polygon(Polygon&&);
+
+    /// \brief Przenoszący operator przypisania.
+    Polygon& operator=(Polygon&&);
+
     ~Polygon();
 
     //! Metoda konstruująca tablicę wierzchołków.

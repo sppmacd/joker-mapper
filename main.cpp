@@ -11,31 +11,43 @@
  * \version 1.0.0
  */
 
+#include "Matrix.h"
 #include "Polygon.h"
 #include "Punkt2.h"
 
 #include <initializer_list>
 #include <iostream>
 
-Punkt2 f(Punkt2 arg)
+Polygon f(Polygon arg)
 {
     return arg;
 }
 
 int main() {
     std::cout << "-----------1----------" << std::endl;
-    Punkt2 p1 = Punkt2(1.0, 2.0);
+    Polygon p1 = {{1.0, 2.0}};
     std::cout << "-----------2----------" << std::endl;
-	Punkt2 p2 = p1;
+	Polygon p2 = p1;
     std::cout << "-----------3----------" << std::endl;
-	Punkt2 p3 = p1 + p2;
+	Polygon p5 = f({{10, 20}});
     std::cout << "-----------4----------" << std::endl;
-	Punkt2 p4 = Punkt2(1000, 2000) + Punkt2(3000, 4000);
+    p2 = p1;
     std::cout << "-----------5----------" << std::endl;
-	Punkt2 p5 = f(Punkt2(10, 20));
-    std::cout << "-----------6----------" << std::endl;
-	Punkt2 p6 = f(Punkt2(100, 200) + Punkt2(100, 200));
+    p2 = std::move(p1);
     std::cout << "----------------------" << std::endl;
+
+    // MATRIX
+    Matrix mat;
+    std::cout << mat << std::endl;
+
+    Matrix mat2{4,4};
+    std::cout << mat2 << std::endl;
+    mat2[0][0] = 1;
+    mat2(1,1) = 1;
+    mat2[2][2] = 1;
+    mat2(3,3) = 1;
+    std::cout << mat2(0,0) << "," << mat2(2,2) << std::endl; // 1,1
+    std::cout << mat2 << std::endl; // macierz jednostkowa
     return 0;
 }
 
@@ -45,39 +57,16 @@ WYNIK:
 (g++ -std=c++20 -fsanitize=undefined,address -g -o klasy *.cpp && ./klasy)
 
 -----------1----------
-Punkt2::Punkt2(double, double)
+Polygon::Polygon(std::initializer_list<Punkt2>)
 -----------2----------
-Punkt2::Punkt2(const Punkt2&)
+Polygon::Polygon(const Polygon&)
 -----------3----------
-Punkt2::Punkt2(std::initializer_list<double>)
+Polygon::Polygon(std::initializer_list<Punkt2>)
+Polygon::Polygon(Polygon&&)
+Polygon::~Polygon()
 -----------4----------
-Punkt2::Punkt2(double, double)
-Punkt2::Punkt2(double, double)
-Punkt2::Punkt2(std::initializer_list<double>)
-Punkt2::~Punkt2()
-Punkt2::~Punkt2()
+Polygon& Polygon::operator=(const Polygon&)
 -----------5----------
-Punkt2::Punkt2(double, double)
-Punkt2::Punkt2(Punkt2&&)
-Punkt2::~Punkt2()
------------6----------
-Punkt2::Punkt2(double, double)
-Punkt2::Punkt2(double, double)
-Punkt2::Punkt2(std::initializer_list<double>)
-Punkt2::Punkt2(Punkt2&&)
-Punkt2::~Punkt2()
-Punkt2::~Punkt2()
-Punkt2::~Punkt2()
+Polygon& Polygon::operator=(Polygon&&)
 ----------------------
-
-1. wywołany tylko (double, double) bo inicjalizacja z rvalue
-2. Nastąpiła kopia
-3. został wywołany konstruktor std::initializer_list (poprzez operator+) bo inicjalizacja z rvalue
-4. utworzone dwa obiekty, poza tym std::initializer_list (poprzez operator+) bo inicjalizacja z rvalue
-5. wywołany konstruktor przenoszący z funkcji - pominięcie kopiowania!!!
-6. utworzenie dwóch obiektów, inicjalizacja argumentu z rvalue, następnie skopiowanie do zmiennej z pominięciem kopiowania!!!
-
-Konstruktor przesuwający informuje kompilator, że ta klasa może być "przesuwana" i w związku z tym może zamieniać kopiowanie
-na przesuwanie gdy to jest dozwolone. Jest wymagany ponieważ deklaracja konstruktora kopiującego niejawnie usuwa deklarację
-konstruktora przenoszącego.
 */

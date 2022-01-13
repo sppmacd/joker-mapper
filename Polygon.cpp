@@ -13,9 +13,11 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
+#include <utility>
 
 size_t Polygon::object_count {};
 
+#undef LOG_CALL
 #define LOG_CALL() std::cout << __PRETTY_FUNCTION__ << std::endl
 
 Polygon::Polygon() {
@@ -59,6 +61,22 @@ Polygon& Polygon::operator=(Polygon const& other) {
     if (this == &other)
         return *this;
     setVertices(other.m_vertices, other.m_count);
+    return *this;
+}
+
+Polygon::Polygon(Polygon&& other)
+    : m_count(std::exchange(other.m_count, 0))
+    , m_vertices(std::exchange(other.m_vertices, nullptr)) {
+    LOG_CALL();
+}
+
+Polygon& Polygon::operator=(Polygon&& other) {
+    if (this == &other)
+        return *this;
+    delete[] m_vertices;
+    m_count = std::exchange(other.m_count, 0);
+    m_vertices = std::exchange(other.m_vertices, nullptr);
+    LOG_CALL();
     return *this;
 }
 

@@ -16,7 +16,8 @@
 #include <cstddef>
 #include <iostream>
 
-#define LOG_CALL() std::cout << __PRETTY_FUNCTION__ << std::endl
+#undef LOG_CALL
+#define LOG_CALL()
 
 class Punkt2 {
     double x { 0.0 };
