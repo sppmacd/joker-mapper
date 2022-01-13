@@ -68,6 +68,9 @@ public:
     //! Zwróć wskaźnik na dane przechowywane przez obiekt.
     Punkt2* vertices();
 
+    //! Zwróć wskaźnik na dane przechowywane przez obiekt.
+    Punkt2 const* vertices() const;
+
     /// \returns Ilość wierzchołków.
     size_t getVertexCount() const { return m_count; }
 
