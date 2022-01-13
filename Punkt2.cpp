@@ -59,17 +59,14 @@ double Punkt2::getDistance(Punkt2 _p) const {
     return p.getRadius();
 }
 
-Punkt2 Punkt2::operator+(Punkt2 const& other) const
-{
-    return {x + other.x, y + other.y};
+Punkt2 Punkt2::operator+(Punkt2 const& other) const {
+    return { x + other.x, y + other.y };
 }
 
-Punkt2 Punkt2::operator-(Punkt2 const& other) const
-{
-    return {x - other.x, y - other.y};
+Punkt2 Punkt2::operator-(Punkt2 const& other) const {
+    return { x - other.x, y - other.y };
 }
 
-double operator*(Punkt2 const& _1, Punkt2 const& _2)
-{
+double operator*(Punkt2 const& _1, Punkt2 const& _2) {
     return _1.getX() * _2.getX() + _1.getY() * _2.getY();
 }

@@ -30,10 +30,14 @@ Polygon::Polygon(std::vector<std::vector<double>> const& data) {
     }
 }
 
-Polygon::Polygon(std::vector<Punkt2> data)
-{
+Polygon::Polygon(std::vector<Punkt2> data) {
     object_count++;
     setVertices(data.data(), data.size());
+}
+
+Polygon::Polygon(Polygon const& other) {
+    object_count++;
+    setVertices(other.m_vertices, other.m_count);
 }
 
 Polygon::~Polygon() {

@@ -17,16 +17,32 @@
 #include <iostream>
 
 int main() {
-    // Punkt2 - przeciążanie operatorów
-    Punkt2 p1{10, 10};
-    Punkt2 p2{50, 14};
+    // Polygon - konstruktor kopiujący
 
-    Punkt2 add = p1 + p2;
-    Punkt2 subtract = p1 - p2;
-    double dot_product = p1 * p2;
-    std::cout << "Add result: " << add.getX() << "," << add.getY() << std::endl;
-    std::cout << "Subtract result: " << subtract.getX() << "," << subtract.getY() << std::endl;
-    std::cout << "Dot product: " << dot_product << std::endl;
+    // 1. Pusty - sprawdzanie czy się nie crashuje
+    {
+        Polygon p1;
+        Polygon p2 { p1 };
+        std::cout << "Ilość obiektów: " << Polygon::getObjectCount() << std::endl;
+    }
+    std::cout << "Ilość obiektów: " << Polygon::getObjectCount() << std::endl;
+
+    // 2. Zapełniony
+    {
+        Polygon p1 { {
+            Punkt2 { 0, 1 },
+            Punkt2 { 0, 2 },
+            Punkt2 { 0, 3 },
+            Punkt2 { 0, 4 },
+            Punkt2 { 0, 5 },
+        } };
+        Polygon p2 { p1 };
+        for (size_t s = 0; s < p2.getVertexCount(); s++) {
+            std::cout << p2.vertices()[s].getX() << "," << p2.vertices()[s].getY() << std::endl;
+        }
+        std::cout << "Ilość obiektów: " << Polygon::getObjectCount() << std::endl;
+    }
+    std::cout << "Ilość obiektów: " << Polygon::getObjectCount() << std::endl;
 
     return 0;
 }

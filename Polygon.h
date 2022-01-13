@@ -29,6 +29,9 @@ public:
     /// \sa Polygon(std::vector<std::vector<double>> const& data)
     explicit Polygon(std::vector<Punkt2> data);
 
+    /// \brief Konstruktor kopiujący.
+    Polygon(Polygon const&);
+
     ~Polygon();
 
     //! Metoda konstruująca tablicę wierzchołków.
@@ -64,6 +67,9 @@ public:
 
     //! Zwróć wskaźnik na dane przechowywane przez obiekt.
     Punkt2* vertices();
+
+    /// \returns Ilość wierzchołków.
+    size_t getVertexCount() const { return m_count; }
 
     /// \brief Oblicz pole figury, zakładając że jest wypukła.
     ///
