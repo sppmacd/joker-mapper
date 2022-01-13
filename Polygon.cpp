@@ -31,7 +31,8 @@ Polygon::Polygon(std::vector<std::vector<double>> const& data) {
     setCount(data.size());
     for (size_t s = 0; s < data.size(); s++) {
         auto const& vertex = data[s];
-        assert(vertex.size() == 2);
+        if(vertex.size() != 2)
+            throw "vertex size must be 2";
         m_vertices[s] = { vertex[0], vertex[1] };
     }
 }
@@ -97,6 +98,8 @@ void Polygon::setVertices(Punkt2* _vertices, int _count) {
 }
 
 void Polygon::changeVertex(int i, double x, double y) {
+    if(i >= m_count || i < 0)
+        throw "changeVertex index out of range";
     Punkt2 p;
     p.setX(x);
     p.setY(y);
@@ -136,14 +139,20 @@ Punkt2 const* Polygon::vertices() const {
 }
 
 Punkt2 Polygon::getVertex(size_t s) const {
+    if(s >= m_count)
+        throw "getVertex index out of range";
     return m_vertices[s];
 }
 
 Punkt2& Polygon::operator[](size_t s) {
+    if(s >= m_count)
+        throw "operator[] index out of range";
     return m_vertices[s];
 }
 
 Punkt2 const& Polygon::operator[](size_t s) const {
+    if(s >= m_count)
+        throw "operator[] index out of range";
     return m_vertices[s];
 }
 
