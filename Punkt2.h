@@ -56,6 +56,15 @@ public:
     /// \brief Ilość aktualnie żyjących obiektów.
     static size_t getObjectCount() { return object_count; }
 
+    /// \returns Suma wektora oraz argumentu
+    Punkt2 operator+(Punkt2 const& other) const;
+
+    /// \returns Różnica wektora oraz argumentu
+    Punkt2 operator-(Punkt2 const& other) const;
+
 private:
     static size_t object_count;
 };
+
+/// \returns Iloczyn skalarny (dot product) podanych punktów.
+double operator*(Punkt2 const& _1, Punkt2 const& _2);
