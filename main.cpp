@@ -1,72 +1,21 @@
 /*! \file main.cpp
  *
- * \brief Kod programu testującego klasę Punkt2 i Polygon
- *
- * Plik zawiera funkcję main(),
- * w której wykonano kilka podstawowych testów
- * dotyczących klasy Punkt2 oraz Polygon.
+ * \brief Kod programu testującego klasę Map.
  *
  * \author Maciej Zygmanowski
  * \date 2022-01-13
  * \version 1.0.0
  */
 
-#include "Matrix.h"
-#include "Polygon.h"
-#include "Punkt2.h"
-
-#include <initializer_list>
-#include <iostream>
-
-Polygon f(Polygon arg)
-{
-    return arg;
-}
+#include "Map.h"
 
 int main() {
-    std::cout << "-----------1----------" << std::endl;
-    Polygon p1 = {{1.0, 2.0}};
-    std::cout << "-----------2----------" << std::endl;
-	Polygon p2 = p1;
-    std::cout << "-----------3----------" << std::endl;
-	Polygon p5 = f({{10, 20}});
-    std::cout << "-----------4----------" << std::endl;
-    p2 = p1;
-    std::cout << "-----------5----------" << std::endl;
-    p2 = std::move(p1);
-    std::cout << "----------------------" << std::endl;
-
-    // MATRIX
-    Matrix mat;
-    std::cout << mat << std::endl;
-
-    Matrix mat2{4,4};
-    std::cout << mat2 << std::endl;
-    mat2[0][0] = 1;
-    mat2(1,1) = 1;
-    mat2[2][2] = 1;
-    mat2(3,3) = 1;
-    std::cout << mat2(0,0) << "," << mat2(2,2) << std::endl; // 1,1
-    std::cout << mat2 << std::endl; // macierz jednostkowa
+    Map map;
+    map.add_chain(MapChain { MapChain::Type::Road, { { 0, 0 }, { 10, 10 }, { 20, 20 } }, 1, RGBA { 0, 1, 0 } });
+    map.add_chain(MapChain { MapChain::Type::Powerline, { { 10, 6 }, { 10, 2 }, { 20, 34 } }, 2, RGBA { 0, 1, 0, 0.4 } });
+    map.add_chain(MapChain { MapChain::Type::Rails, { { 50, 7 }, { 65, 10 }, { 16, 20 } }, 2, RGBA { 1, 0, 0 } });
+    map.add_point(MapPoint {});
+    map.add_polygon(MapPolygon { MapPolygon::Type::Building, { { 0, 0 }, { 50, 3 }, { 12, 5 }, { 15, 9 }, { 12, 26 } }, 1, RGBA{0, 0, 0}, RGBA{1, 1, 1, 0}, 200 });
+    std::cout << map << std::endl;
     return 0;
 }
-
-/*
-WYNIK:
-
-(g++ -std=c++20 -fsanitize=undefined,address -g -o klasy *.cpp && ./klasy)
-
------------1----------
-Polygon::Polygon(std::initializer_list<Punkt2>)
------------2----------
-Polygon::Polygon(const Polygon&)
------------3----------
-Polygon::Polygon(std::initializer_list<Punkt2>)
-Polygon::Polygon(Polygon&&)
-Polygon::~Polygon()
------------4----------
-Polygon& Polygon::operator=(const Polygon&)
------------5----------
-Polygon& Polygon::operator=(Polygon&&)
-----------------------
-*/

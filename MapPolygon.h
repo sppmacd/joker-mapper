@@ -14,14 +14,25 @@
 
 class MapPolygon : public Polygon {
 public:
+    enum class Type {
+        Building,
+        Forest,
+        Farmland,
+        //...
+    };
+
     MapPolygon() = default;
 
-    MapPolygon(std::initializer_list<Punkt2> points, int border_width, RGBA border_color, RGBA fill_color, int opacity)
+    MapPolygon(Type type, std::initializer_list<Punkt2> points, int border_width, RGBA border_color, RGBA fill_color, int opacity)
         : Polygon(points)
+        , m_type(type)
         , m_border_width(border_width)
         , m_border_color(border_color)
         , m_fill_color(fill_color)
         , m_opacity(opacity) { }
+
+    /// \returns Type (purpose)
+    Type type() const { return m_type; }
 
     /// \returns Border width, in pixels
     int border_width() const { return m_border_width; }
@@ -34,6 +45,10 @@ public:
 
     /// \returns Opacity (in range <0, 255>)
     int opacity() const { return m_opacity; }
+
+    /// \brief Set type (purpose).
+    /// \param v - Type (as Type enum)
+    void set_type(Type type) { m_type = type; }
 
     /// \brief Set border width.
     /// \param v - Border width, in pixels
@@ -54,6 +69,7 @@ public:
 private:
     friend std::ostream& operator<<(std::ostream&, MapPolygon const&);
 
+    Type m_type {};
     int m_border_width {};
     RGBA m_border_color;
     RGBA m_fill_color;
