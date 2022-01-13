@@ -59,5 +59,24 @@ int main() {
         std::cout << "punkt=" << mpi.punkt() << " color=" << mpi.color() << std::endl;
     }
 
+#define EXCEPTION_TEST(...)                                                                            \
+    try {__VA_ARGS__} catch (const char* c) { std::cout << "const char* exception: " << c << std::endl; } \
+    catch (std::exception & e) {                                                                       \
+        std::cout << "std::exception: " << e.what() << std::endl;                                      \
+    }
+
+    EXCEPTION_TEST({
+        pol_global.getVertex(5);
+    })
+
+    EXCEPTION_TEST({
+        pol_global.changeVertex(100, 2, 3);
+    })
+
+    EXCEPTION_TEST({
+        Punkt2 {}.getAngle();
+    })
+
+#undef EXCEPTION_TEST
     return 0;
 }

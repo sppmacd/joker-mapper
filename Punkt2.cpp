@@ -13,6 +13,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <stdexcept>
 
 size_t Punkt2::object_count {};
 
@@ -82,6 +83,8 @@ double Punkt2::getRadius() const {
     return std::sqrt(x * x + y * y);
 }
 double Punkt2::getAngle() const {
+    if (x == 0 && y == 0)
+        throw std::invalid_argument { "cannot compute angle for point (0,0)" };
     return std::atan2(y, x);
 }
 
