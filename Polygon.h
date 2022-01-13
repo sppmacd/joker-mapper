@@ -12,6 +12,7 @@
 #include "Punkt2.h"
 
 #include <cstddef>
+#include <ostream>
 #include <vector>
 
 class Polygon {
@@ -90,6 +91,11 @@ public:
     static size_t getObjectCount() { return object_count; }
 
 private:
+    /// \brief Operator wypisywania obiektu klasy Polygon.
+    ///
+    /// Do obsługi np. strumienia std::cout.
+    friend std::ostream& operator<<(std::ostream&, Polygon const&);
+
     double getTriangleArea(Punkt2 p1, Punkt2 p2, Punkt2 p3) const;
 
     size_t m_count {};

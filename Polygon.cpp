@@ -90,6 +90,10 @@ Punkt2* Polygon::vertices() {
     return m_vertices;
 }
 
+Punkt2 const* Polygon::vertices() const {
+    return m_vertices;
+}
+
 double Polygon::getTriangleArea(Punkt2 p1, Punkt2 p2, Punkt2 p3) const {
     double a = p1.getDistance(p2);
     double b = p2.getDistance(p3);
@@ -123,4 +127,14 @@ double Polygon::getArea() const {
     }
 
     return std::abs(p) / 2;
+}
+
+std::ostream& operator<<(std::ostream& out, Polygon const& p) {
+    out << "Polygon{";
+    for (size_t s = 0; s < p.getVertexCount(); s++) {
+        out << p.vertices()[s];
+        if(s != p.getVertexCount() - 1)
+            out << ", ";
+    }
+    return out << "}";
 }

@@ -14,6 +14,7 @@
 #pragma once
 
 #include <cstddef>
+#include <ostream>
 
 class Punkt2 {
     double x { 0.0 };
@@ -68,3 +69,8 @@ private:
 
 /// \returns Iloczyn skalarny (dot product) podanych punktów.
 double operator*(Punkt2 const& _1, Punkt2 const& _2);
+
+/// \brief Operator wypisywania obiektu klasy Punkt2.
+///
+/// Do obsługi np. strumienia std::cout.
+std::ostream& operator<<(std::ostream&, Punkt2 const&);

@@ -70,3 +70,8 @@ Punkt2 Punkt2::operator-(Punkt2 const& other) const {
 double operator*(Punkt2 const& _1, Punkt2 const& _2) {
     return _1.getX() * _2.getX() + _1.getY() * _2.getY();
 }
+
+std::ostream& operator<<(std::ostream& out, Punkt2 const& punkt)
+{
+    return out << "[" << punkt.getX() << "," << punkt.getY() << "]";
+}

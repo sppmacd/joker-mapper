@@ -37,9 +37,7 @@ int main() {
             Punkt2 { 0, 5 },
         } };
         Polygon p2 { p1 };
-        for (size_t s = 0; s < p2.getVertexCount(); s++) {
-            std::cout << p2.vertices()[s].getX() << "," << p2.vertices()[s].getY() << std::endl;
-        }
+        std::cout << p2 << std::endl;
         std::cout << "Ilość obiektów: " << Polygon::getObjectCount() << std::endl;
     }
     std::cout << "Ilość obiektów: " << Polygon::getObjectCount() << std::endl;
