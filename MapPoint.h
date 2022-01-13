@@ -22,6 +22,9 @@ public:
     int getVisRadius() const { return visRadius; }
     RGBA getVisColor() const { return visColor; }
 
+    explicit operator int() const { return visRadius; }
+    operator RGBA() const { return visColor; }
+
 private:
     friend std::ostream& operator<<(std::ostream& os, const MapPoint& obj);
 };

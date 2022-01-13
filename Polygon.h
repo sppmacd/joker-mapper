@@ -23,7 +23,7 @@ public:
     /// Konstruktor wymaga, aby każdy podwektor miał wielkość 2.
     /// \example auto Polygon {{0,0}, {10,0}, {10,10}, {0,10}};
     /// \sa Polygon(std::vector<Point> const& data)
-    explicit Polygon(std::vector<std::vector<double>> const& data);
+    Polygon(std::vector<std::vector<double>> const& data);
 
     /// \brief Konstruktor z wektorem punktów
     /// \example auto Polygon {{0,0}, {10,0}, {10,10}, {0,10}};
