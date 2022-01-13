@@ -16,13 +16,6 @@
 
 #include <iostream>
 
-Punkt2 make_point(double x, double y) {
-    Punkt2 p;
-    p.setX(x);
-    p.setY(y);
-    return p;
-}
-
 int main() {
     /*// Punkt2
 
@@ -52,35 +45,29 @@ int main() {
     std::cout << "6. sizeof(p1) == " << sizeof(p1) << std::endl;
     */
 
-    // Polygon
-    {
-        Polygon pol;
-        pol.setCount(4);
-        pol.vertices()[0] = make_point(0, 0);
-        pol.vertices()[1] = make_point(10, 0);
-        pol.vertices()[2] = make_point(10, 10);
-        pol.vertices()[3] = make_point(0, 10);
-        pol.changeVertex(3, 0, -10);
+    // Punkt2 - konstruktory
+    Punkt2 p1{0, 0};
+    Punkt2 p2{0, 10};
+    Punkt2 p3{10, 10};
+    Punkt2 p4{10, 0};
+    // Gdy to odkomentuję wypisze 0 ponieważ konstruktor kopiujący nie inkrementuje zmiennej
+    // object_count, a skopiowany obiekt, który jest niszczony dekrementuje ją.
+    //Polygon polZpkt {{p1, p2, p3, p4}};
+    std::cout << "Ilość obiektów Punkt2: " << Punkt2::getObjectCount() << std::endl;
 
-        std::cout << "Obwód: " << pol.getPerimeter() << std::endl;
-
-        // Polygon - pole figury wypukłej
-        pol.setCount(5);
-        pol.changeVertex(4, -6, 5);
-        std::cout << "Pole (wypukłe): " << pol.getConvexArea() << std::endl;
-    }
-
-    // Polygon - pole figury dowolnej
-    {
-        Polygon pol2;
-        pol2.setCount(5);
-        pol2.vertices()[0] = make_point(0, 0);
-        pol2.vertices()[1] = make_point(10, 0);
-        pol2.vertices()[2] = make_point(5, 5);
-        pol2.vertices()[3] = make_point(10, 10);
-        pol2.vertices()[4] = make_point(-10, 10);
-        std::cout << "Pole (dowolne): " << pol2.getArea() << std::endl;
-    }
+    // Polygon - konstruktory
+    Polygon pol;
+    Polygon pol2 {{
+        std::vector<double>{0, 0},
+        std::vector<double>{10, 0},
+        std::vector<double>{5, 5},
+        std::vector<double>{10, 10},
+        std::vector<double>{-10, 10}
+    }};
+    std::cout << "pol2 (sprawdzenie inicjalizacji): " << std::endl;
+    for(size_t s = 0; s < 5; s++)
+        std::cout << "- " << pol2.vertices()[s].getX() << "," << pol2.vertices()[s].getY() << std::endl;
+    std::cout << "Ilość obiektów Polygon: " << Polygon::getObjectCount() << std::endl;
 
     return 0;
 }

@@ -1,51 +1,58 @@
 /*! \file Punkt2.cpp
-*
-* \brief Zawiera definicję klasy Punkt2
-*
-* Plik zawiera implementację metod klasy Punkt2.
-*
-* \author Maciej Zygmanowski
-* \date 2022-01-13
-* \version 1.0.0
-*/
+ *
+ * \brief Zawiera definicję klasy Punkt2
+ *
+ * Plik zawiera implementację metod klasy Punkt2.
+ *
+ * \author Maciej Zygmanowski
+ * \date 2022-01-13
+ * \version 1.0.0
+ */
 
 #include "Punkt2.h"
 
 #include <cmath>
+#include <iostream>
 
-//settery
-void Punkt2::setX(double _x)
-{
+size_t Punkt2::object_count {};
+
+Punkt2::Punkt2(double x_, double y_)
+    : x(x_)
+    , y(y_) {
+    object_count++;
+}
+
+Punkt2::~Punkt2() {
+    object_count--;
+    std::cout << "~Punkt2()" << std::endl;
+}
+
+// settery
+void Punkt2::setX(double _x) {
     x = _x;
 }
-void Punkt2::setY(double _y)
-{
+void Punkt2::setY(double _y) {
     y = _y;
 }
 
-//gettery
-double Punkt2::getX()
-{
+// gettery
+double Punkt2::getX() {
     return x;
 }
-double Punkt2::getY()
-{
+double Punkt2::getY() {
     return y;
 }
 
-//współrzędne biegunowe
-double Punkt2::getRadius()
-{
-    return std::sqrt(x*x+y*y);
+// współrzędne biegunowe
+double Punkt2::getRadius() {
+    return std::sqrt(x * x + y * y);
 }
-double Punkt2::getAngle()
-{
+double Punkt2::getAngle() {
     return std::atan2(y, x);
 }
 
-//odległość punktu od punktu _p
-double Punkt2::getDistance(Punkt2 _p)
-{
+// odległość punktu od punktu _p
+double Punkt2::getDistance(Punkt2 _p) {
     Punkt2 p;
     p.setX(_p.getX() - getX());
     p.setY(_p.getY() - getY());

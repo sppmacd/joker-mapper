@@ -10,8 +10,36 @@
 #include "Polygon.h"
 #include "Punkt2.h"
 
+#include <cassert>
 #include <cmath>
 #include <iostream>
+
+size_t Polygon::object_count {};
+
+Polygon::Polygon() {
+    object_count++;
+}
+
+Polygon::Polygon(std::vector<std::vector<double>> const& data) {
+    object_count++;
+    setCount(data.size());
+    for (size_t s = 0; s < data.size(); s++) {
+        auto const& vertex = data[s];
+        assert(vertex.size() == 2);
+        m_vertices[s] = { vertex[0], vertex[1] };
+    }
+}
+
+Polygon::Polygon(std::vector<Punkt2> data)
+{
+    object_count++;
+    setVertices(data.data(), data.size());
+}
+
+Polygon::~Polygon() {
+    object_count--;
+    delete[] m_vertices;
+}
 
 void Polygon::setVertices(Punkt2* _vertices, int _count) {
     // powinniśmy je skopiować bo nie wiadomo czy będą istnieć potem
@@ -30,7 +58,7 @@ void Polygon::changeVertex(int i, double x, double y) {
     m_vertices[i] = p;
 }
 
-void Polygon::setCount(int n) {
+void Polygon::setCount(size_t n) {
     if (m_count < n) {
         auto old_vertices = m_vertices;
         m_vertices = new Punkt2[n];
