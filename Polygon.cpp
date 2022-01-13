@@ -10,6 +10,9 @@
 #include "Polygon.h"
 #include "Punkt2.h"
 
+#include <cmath>
+#include <iostream>
+
 void Polygon::setVertices(Punkt2* _vertices, int _count) {
     // powinniśmy je skopiować bo nie wiadomo czy będą istnieć potem
     delete[] m_vertices;
@@ -32,7 +35,7 @@ void Polygon::setCount(int n) {
         auto old_vertices = m_vertices;
         m_vertices = new Punkt2[n];
         for (size_t s = 0; s < n; s++) {
-            if(s < m_count)
+            if (s < m_count)
                 m_vertices[s] = old_vertices[s];
             else
                 m_vertices[s] = {};
@@ -53,4 +56,39 @@ double Polygon::getPerimeter() {
 
 Punkt2* Polygon::vertices() {
     return m_vertices;
+}
+
+double Polygon::getTriangleArea(Punkt2 p1, Punkt2 p2, Punkt2 p3) const {
+    double a = p1.getDistance(p2);
+    double b = p2.getDistance(p3);
+    double c = p3.getDistance(p1);
+    double p = (a + b + c) / 2;
+    return std::sqrt(p * (p - a) * (p - b) * (p - c));
+}
+
+double Polygon::getConvexArea() const {
+    if (m_count < 3)
+        return 0;
+
+    double P {};
+    for (size_t s = 1; s < m_count - 1; s++)
+        P += getTriangleArea(m_vertices[0], m_vertices[s], m_vertices[s + 1]);
+    return P;
+}
+
+double Polygon::getArea() const {
+    if (m_count < 3)
+        return 0;
+
+    // https://en.wikipedia.org/wiki/Shoelace_formula
+    double p {};
+    p += m_vertices[m_count - 1].getX() * m_vertices[0].getY();
+    p -= m_vertices[0].getX() * m_vertices[m_count - 1].getY();
+
+    for (size_t s = 0; s < m_count - 1; s++) {
+        p += m_vertices[s].getX() * m_vertices[s + 1].getY();
+        p -= m_vertices[s + 1].getX() * m_vertices[s].getY();
+    }
+
+    return std::abs(p) / 2;
 }

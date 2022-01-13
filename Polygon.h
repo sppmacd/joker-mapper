@@ -48,7 +48,21 @@ public:
     //! Zwróć wskaźnik na dane przechowywane przez obiekt.
     Punkt2* vertices();
 
+    //! Oblicz pole figury, zakładając że jest wypukła.
+    ///
+    /// UWAGA: Ta metoda może zwracać nieprawidłowe wyniki dla figur wklęsłych.
+    /// \returns 0, jeżeli figura ma mniej niż 3 wierzchołki, w przeciwnym
+    /// razie pole figury.
+    double getConvexArea() const;
+
+    //! Oblicz pole dowolnej figury, wykorzystując Shoelace formula.
+    /// \returns 0, jeżeli figura ma mniej niż 3 wierzchołki.
+    /// razie pole figury.
+    double getArea() const;
+
 private:
+    double getTriangleArea(Punkt2 p1, Punkt2 p2, Punkt2 p3) const;
+
     size_t m_count {};
     Punkt2* m_vertices {};
 };
