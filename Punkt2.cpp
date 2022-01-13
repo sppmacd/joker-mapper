@@ -36,7 +36,7 @@ double Punkt2::getY()
 //współrzędne biegunowe
 double Punkt2::getRadius()
 {
-    return std::sqrt(x*x+y+y);
+    return std::sqrt(x*x+y*y);
 }
 double Punkt2::getAngle()
 {
