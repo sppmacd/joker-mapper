@@ -34,8 +34,11 @@ public:
     /// \example Punkt2 p {10, 1};
     Polygon(std::initializer_list<Punkt2>);
 
-    /// \brief Konstruktor kopiujący.
+    /// \brief Konstruktor kopiujący. Wykonuje kopię głęboką.
     Polygon(Polygon const&);
+
+    /// \brief Kopiujący operator przypisania. Wykonuje kopię głęboką.
+    Polygon& operator=(Polygon const&);
 
     ~Polygon();
 
@@ -93,6 +96,18 @@ public:
 
     /// \brief Ilość aktualnie żyjących obiektów.
     static size_t getObjectCount() { return object_count; }
+
+    /// \returns Wierzchołek o indeksie podanym jako argument.
+    /// UWAGA: Funkcja nie sprawdza wychodzenia poza zakres tablicy.
+    Punkt2 getVertex(size_t) const;
+
+    /// \returns Referencję do wierzchołka o indeksie podanym jako argument.
+    /// UWAGA: Funkcja nie sprawdza wychodzenia poza zakres tablicy.
+    Punkt2& operator[](size_t);
+
+    /// \returns Referencję do wierzchołka o indeksie podanym jako argument.
+    /// UWAGA: Funkcja nie sprawdza wychodzenia poza zakres tablicy.
+    Punkt2 const& operator[](size_t) const;
 
 private:
     /// \brief Operator wypisywania obiektu klasy Polygon.
