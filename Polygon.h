@@ -60,7 +60,7 @@ public:
     void setCount(size_t n);
 
     //! Metoda zwraca obwód wielokąta.
-    double getPerimeter();
+    double getPerimeter() const;
 
     //! Zwróć wskaźnik na dane przechowywane przez obiekt.
     Punkt2* vertices();

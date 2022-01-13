@@ -38,20 +38,20 @@ public:
     void setY(double _y);
 
     /// \returns Współrzędna X punktu
-    double getX();
+    double getX() const;
 
     /// \returns Współrzędna Y punktu
-    double getY();
+    double getY() const;
 
     /// \returns Promień (odległość od początku układu współrzędnych)
-    double getRadius();
+    double getRadius() const;
 
     /// \returns Kąt punktu (atan2(x,y))
-    double getAngle();
+    double getAngle() const;
 
     /// \param _p - Inny punkt
     /// \returns Odległość od punktu `p`
-    double getDistance(Punkt2 _p);
+    double getDistance(Punkt2 _p) const;
 
     /// \brief Ilość aktualnie żyjących obiektów.
     static size_t getObjectCount() { return object_count; }

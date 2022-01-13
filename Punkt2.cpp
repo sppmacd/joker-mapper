@@ -36,23 +36,23 @@ void Punkt2::setY(double _y) {
 }
 
 // gettery
-double Punkt2::getX() {
+double Punkt2::getX() const {
     return x;
 }
-double Punkt2::getY() {
+double Punkt2::getY() const {
     return y;
 }
 
 // współrzędne biegunowe
-double Punkt2::getRadius() {
+double Punkt2::getRadius() const {
     return std::sqrt(x * x + y * y);
 }
-double Punkt2::getAngle() {
+double Punkt2::getAngle() const {
     return std::atan2(y, x);
 }
 
 // odległość punktu od punktu _p
-double Punkt2::getDistance(Punkt2 _p) {
+double Punkt2::getDistance(Punkt2 _p) const {
     Punkt2 p;
     p.setX(_p.getX() - getX());
     p.setY(_p.getY() - getY());

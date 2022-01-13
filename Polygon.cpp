@@ -73,7 +73,7 @@ void Polygon::setCount(size_t n) {
     m_count = n;
 }
 
-double Polygon::getPerimeter() {
+double Polygon::getPerimeter() const {
     double p {};
     for (size_t s = 0; s < m_count; s++) {
         auto diff = m_vertices[s].getDistance(m_vertices[(s + 1) % m_count]);
