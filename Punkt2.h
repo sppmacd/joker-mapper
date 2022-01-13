@@ -14,14 +14,32 @@
 #pragma once
 
 #include <cstddef>
-#include <ostream>
+#include <iostream>
+
+#define LOG_CALL() std::cout << __PRETTY_FUNCTION__ << std::endl
 
 class Punkt2 {
     double x { 0.0 };
     double y { 0.0 };
 
 public:
-    Punkt2() { object_count++; }
+    /// \brief Konstruktor domyślny.
+    Punkt2() {
+        object_count++;
+        LOG_CALL();
+    }
+
+    /// \brief Konstruktor kopiujący.
+    Punkt2(Punkt2 const& other);
+
+    /// \brief Konstruktor przesuwający.
+    Punkt2(Punkt2&& other);
+
+    /// \brief Kopiujący operator przypisania.
+    Punkt2& operator=(Punkt2 const& other);
+
+    /// \brief Przesuwający operator przypisania.
+    Punkt2& operator=(Punkt2&& other);
 
     /// \brief Konstruktor klasy Punkt2.
     /// \param x_

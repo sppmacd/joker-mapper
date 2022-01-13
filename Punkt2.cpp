@@ -20,18 +20,45 @@ Punkt2::Punkt2(double x_, double y_)
     : x(x_)
     , y(y_) {
     object_count++;
-    std::cout << "Uruchomiono Punkt2(" << x_ << "," << y_ << ")" << std::endl;
+    LOG_CALL();
 }
 
 Punkt2::Punkt2(std::initializer_list<double> p) {
     x = *(p.begin());
     y = *(p.begin() + 1);
     object_count++;
-    std::cout << "Uruchomienie konstruktora z std::initializer_list dla obiektu: " << *this << std::endl;
+    LOG_CALL();
+}
+
+Punkt2::Punkt2(Punkt2 const& other)
+    : x(other.x)
+    , y(other.y) { LOG_CALL(); }
+
+Punkt2::Punkt2(Punkt2&& other)
+    : x(other.x)
+    , y(other.y) { LOG_CALL(); }
+
+Punkt2& Punkt2::operator=(Punkt2 const& other) {
+    LOG_CALL();
+    if (this == &other)
+        return *this;
+    x = other.x;
+    y = other.y;
+    return *this;
+}
+
+Punkt2& Punkt2::operator=(Punkt2&& other) {
+    LOG_CALL();
+    if (this == &other)
+        return *this;
+    x = other.x;
+    y = other.y;
+    return *this;
 }
 
 Punkt2::~Punkt2() {
     object_count--;
+    LOG_CALL();
 }
 
 // settery
