@@ -18,13 +18,23 @@ int main() {
     map.add_polygon(MapPolygon { MapPolygon::Type::Building, { { 0, 0 }, { 50, 3 }, { 12, 5 }, { 15, 9 }, { 12, 26 } }, 1, RGBA { 0, 0, 0 }, RGBA { 1, 1, 1, 0 }, 200 });
     std::cout << map << std::endl;
 
-    MapPoint mp{10, 15, -54, {1, 0, 1, 0.5}};
+    MapPoint mp { 10, 15, -54, { 1, 0, 1, 0.5 } };
     // int test1 = mp; // error: explicit conversion
     RGBA test2 = mp;
     std::cout << static_cast<int>(mp) << std::endl;
     std::cout << RGBA(mp) << std::endl;
 
-    Polygon pol = std::vector<std::vector<double>> { { 0, 0 }, { 1, 1 }, { 2, 2 } };
-    std::cout << pol << std::endl;
+    Polygon pol_global = std::vector<std::vector<double>> { { 0, 0 }, { 1, 1 }, { 2, 2 } };
+    std::cout << pol_global << std::endl;
+
+    // Lab 35 / 2
+    Polygon pol1 {
+        { 0, 0 }, { 1, 1 }, { 2, 2 }
+    };
+    Punkt2* arr = static_cast<Punkt2*>(pol1); // wymagane static_cast
+    size_t count = pol1; // niewymagane static_cast
+    for (size_t s = 0; s < count; s++)
+        std::cout << arr[s] << std::endl; // ok
+
     return 0;
 }

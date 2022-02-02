@@ -85,6 +85,14 @@ public:
     //! Zwróć wskaźnik na dane przechowywane przez obiekt.
     Punkt2 const* vertices() const;
 
+    //! Zwróć wskaźnik na dane przechowywane przez obiekt
+    /// \sa vertices
+    explicit operator Punkt2*() { return vertices(); }
+
+    /// \returns Ilość wierzchołków.
+    /// \sa getVertexCount
+    operator size_t() { return getVertexCount(); }
+
     /// \returns Ilość wierzchołków.
     size_t getVertexCount() const { return m_count; }
 
