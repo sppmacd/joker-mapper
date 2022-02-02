@@ -8,6 +8,7 @@
  */
 
 #include "Map.h"
+#include "MapPoint.h"
 
 int main() {
     Map map;
@@ -49,6 +50,13 @@ int main() {
         size_t count = pol1; // niewymagane static_cast
         for (size_t s = 0; s < count; s++)
             std::cout << pol1[s] << std::endl; // ok
+    }
+
+    {
+        std::cout << "Lab 35 / 4 - test" << std::endl;
+        MapPointInherited mpi { { 5, 5 }, RGBA(1, 0, 1, 0) };
+        std::cout << "punkt=" << mpi.getX() << "," << mpi.getY() << " color=" << mpi.r() << "," << mpi.g() << "," << mpi.b() << "," << mpi.a() << std::endl;
+        std::cout << "punkt=" << mpi.punkt() << " color=" << mpi.color() << std::endl;
     }
 
     return 0;

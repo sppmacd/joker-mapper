@@ -28,3 +28,20 @@ public:
 private:
     friend std::ostream& operator<<(std::ostream& os, const MapPoint& obj);
 };
+
+// Lab 35, zad 4
+class MapPointInherited : public Punkt2, public RGBA
+{
+public:
+    /// Construct MapPointInherited from point and color.
+    /// \param point
+    /// \param color
+    MapPointInherited(Punkt2 p, RGBA rgba)
+    : Punkt2(p), RGBA(rgba) {}
+
+    /// Convert this object to underlying Punkt2.
+    Punkt2 punkt() const { return (Punkt2)*this; }
+
+    /// Convert this object to underlying color.
+    RGBA color() const { return (RGBA)*this; }
+};
