@@ -27,14 +27,29 @@ int main() {
     Polygon pol_global = std::vector<std::vector<double>> { { 0, 0 }, { 1, 1 }, { 2, 2 } };
     std::cout << pol_global << std::endl;
 
-    // Lab 35 / 2
-    Polygon pol1 {
-        { 0, 0 }, { 1, 1 }, { 2, 2 }
-    };
-    Punkt2* arr = static_cast<Punkt2*>(pol1); // wymagane static_cast
-    size_t count = pol1; // niewymagane static_cast
-    for (size_t s = 0; s < count; s++)
-        std::cout << arr[s] << std::endl; // ok
+    {
+        std::cout << "Lab 35 / 2 - test" << std::endl;
+        Polygon pol1 {
+            { 0, 0 }, { 1, 1 }, { 2, 2 }
+        };
+        Punkt2* arr = static_cast<Punkt2*>(pol1); // wymagane static_cast
+        size_t count = pol1;                      // niewymagane static_cast
+        for (size_t s = 0; s < count; s++)
+            std::cout << arr[s] << std::endl; // ok
+    }
+
+    {
+        std::cout << "Lab 35 / 3 - test" << std::endl;
+        std::vector<std::vector<double>> verts {
+            { 0, 0 },
+            { 1, 1 },
+            { 2, 2 }
+        };
+        Polygon pol1 { verts };
+        size_t count = pol1; // niewymagane static_cast
+        for (size_t s = 0; s < count; s++)
+            std::cout << pol1[s] << std::endl; // ok
+    }
 
     return 0;
 }

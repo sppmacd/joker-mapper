@@ -21,6 +21,7 @@ public:
 
     /// \brief Konstruktor z wektorem wektorów współrzędnych.
     /// Konstruktor wymaga, aby każdy podwektor miał wielkość 2.
+    /// Lab 35, zad 3
     /// \example auto Polygon {{0,0}, {10,0}, {10,10}, {0,10}};
     /// \sa Polygon(std::vector<Point> const& data)
     Polygon(std::vector<std::vector<double>> const& data);
